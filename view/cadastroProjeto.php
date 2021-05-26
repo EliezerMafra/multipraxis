@@ -4,7 +4,8 @@
 ?>
 
 <!-- CONTEUDO DA PÁGINA AQUI -->
-<form>
+<form action='../dao/projetoDao.php?op=0' method="POST" enctype="multipart/form-data">
+    <!-- <input type="hidden" name="op" value="0"/> -->
     <label>Título</label>
     <br/>
     <input type="text" name="titulo" required/>
@@ -17,9 +18,13 @@
     <br/>
     <input type="text" name="autor" required/>
     <br/>
+    <label>Palavras Chave</label>
+    <br/>
+    <input type="text" name="palavras" required/>
+    <br/>
     <label>Arquivo</label>
     <br/>
-    <input type="file" name="arquivo" required/> <!-- ESTUDAR COMO TRABALHAR COM ARQUIVOS EM PHP --> 
+    <input type="file" name="documento" required/> <!-- ESTUDAR COMO TRABALHAR COM ARQUIVOS EM PHP --> 
     <br/> <!--  https://codewithawa.com/posts/how-to-upload-and-download-files-php-and-mysql -->
     <label>Coautor 1</label>
     <br/>
