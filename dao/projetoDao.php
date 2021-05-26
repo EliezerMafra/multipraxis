@@ -3,6 +3,7 @@
 
      
      //Se seguir MVC esse trecho fica em um arquivo controller--------------------
+     
      $op = $_GET['op'];
 
      switch($op){
