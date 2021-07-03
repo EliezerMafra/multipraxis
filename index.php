@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['username'])){
-     echo "<h3 class='text-center'>Welcome - " . $_SESSION['username'] . "</h3>";
+     echo "<h3 class='text-center'>Bem-vindo " . $_SESSION['username'] . "</h3>";
      
 }
 else{
@@ -11,39 +11,36 @@ else{
 ?>
 <?php 
      require_once("./view/containers/header.php")
-     ?>
+?>
 
 <!-- CONTEUDO DA PÁGINA AQUI -->
 <form action="./view/pesquisa.php" method="get">
-     <label> Digite sua Pesquisa </label>
+     <label class="form-label"> Digite sua Pesquisa </label>
      <br/>
-     <input type="text" name="elementoPesquisa" />
-     <input type="submit" value="Pesquisar" />
+     <input type="text" class="form-label" name="elementoPesquisa" />
+     <input type="submit" class="btn btn-success" value="Pesquisar" />
 </form>
 
 <br/>
+<a href="./view/artigo.php?acesso=professor" class="btn btn-primary">Artigos para Professores</a>
+<br/>
+<br/>
 
-<form action="./view/artigo.php" method="get">
-     <input type="hidden" name="acesso" value="professor"/>
-     <input type="submit" value="Artigos para Professores" />
-</form>
+<a href="./view/artigo.php?acesso=aluno" class="btn btn-primary">Artigos para Alunos</a>
+<br/>
+<br/>
 
-<form action="./view/artigo.php" method="get">
-     <input type="hidden" name="acesso" value="aluno"/>
-     <input type="submit" value="Artigos para Alunos" />
-</form>
+<a href="./view/noticias.php" class="btn btn-primary">Notícias</a>
+<br/>
+<br/>
 
-<form action="./view/noticias.php" method="get">
-     <input type="submit" value="Notícias" />
-</form>
+<a href="./view/pilulas.php" class="btn btn-primary">Pilulas do conhecimento</a>
+<br/>
+<br/>
 
-<form action="./view/pilulas.php" method="get">
-     <input type="submit" value="Pilulas do conhecimento" />
-</form>
-
-<form action="./view/perfil.php" method="get">
-     <input type="submit" value="Meu perfil" />
-</form>
+<a href="./view/perfil.php" class="btn btn-info">Meu perfil</a>
+<br/>
+<br/>
 
 
 

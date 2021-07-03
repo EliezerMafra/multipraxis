@@ -1,11 +1,43 @@
 <?php 
     session_start();
     require_once("./containers/header.php");
+    require_once('../controller/dbconfig.php'); 
+    require_once("../dao/projetoDao.php");
+
+    if(isset($_POST['cadastroSubmit'])){
+        //$fileName = $_FILES['documento']['name'];
+
+        $fileName = $_POST['titulo'].$_POST['autor'].".".pathinfo($_FILES['documento']['name'], PATHINFO_EXTENSION);
+
+        $destination = '../uploads/'.$fileName;
+
+        $file = $_FILES['documento']['tmp_name'];
+
+        if(move_uploaded_file($file, $destination)){
+
+            if(insert($conn, $_POST['titulo'], $_POST['resumo'], $_POST['autor'], $_POST['palavras'], $_POST['coautor1'], $_POST['coautor2'], $_POST['coautor3'], $_POST['coautor4'], $_POST['coautor5'], $fileName)){
+                echo "
+                    <script>
+                            alert('Enviado com Sucesso!!!');
+                            window.location.href = './perfil.php';
+                    </script>
+                    ";
+            }else{
+                echo "
+                    <script>
+                            alert('Erro ao enviar!!!');
+                            window.location.href = './cadastroProjeto.php';
+                    </script>
+                    ";
+            }
+        }
+
+    }
+
 ?>
 
 <!-- CONTEUDO DA PÁGINA AQUI -->
-<form action='../dao/projetoDao.php?op=0' method="POST" enctype="multipart/form-data">
-    <!-- <input type="hidden" name="op" value="0"/> -->
+<form method="POST" enctype="multipart/form-data">
     <label>Título</label>
     <br/>
     <input type="text" name="titulo" required/>
@@ -16,7 +48,7 @@
     <br/>
     <label>Autor</label>
     <br/>
-    <input type="text" name="autor" required/>
+    <input type="text" name="autor" value="<?php echo $_SESSION['fullName'] ?>" readonly required/>
     <br/>
     <label>Palavras Chave</label>
     <br/>
@@ -46,8 +78,14 @@
     <br/>
     <input type="text" name="coautor5" />
     <br/>
-    <input type="submit"  class="btn btn-success" value="Cadastrar" />
+    <br/>
+    <input type="submit"  name="cadastroSubmit" class="btn btn-success" value="Cadastrar" />
 </form>
+
+<br/>
+<a href="./perfil.php" class="btn btn-secondary">Voltar</a>
+<br/>
+<br/>
 
 <?php 
      require_once("./containers/footer.php");

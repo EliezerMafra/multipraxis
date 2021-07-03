@@ -1,6 +1,6 @@
 <?php
     require_once('./controller/dbconfig.php');   
-          if(isset($_POST["login"])){  
+            if(isset($_POST["login"])){  
                 $query = "SELECT * FROM users where username = :username AND password = :password";
                 $stmt = $conn->prepare($query);
                 $stmt->execute(
@@ -9,11 +9,25 @@
                     'password' => $_POST['password']
                     ]
                 );
+
                 $count = $stmt->rowCount();
                 if($count > 0){
-                    $_SESSION['username'] = $_POST['username'];
-					$_SESSION['password'] = $_POST['password'];
+                    session_start();
+
+                    $query = "SELECT * FROM users where username = '" . $_POST['username'] . "' AND password = '" . $_POST['password'] . "'";
+                    //echo $query;
+
+                    $result = $conn->query($query);
+                    //var_dump($result);
+
+                    foreach($result as $row){
+                        $_SESSION['username'] = $row['username'];
+                        $_SESSION['password'] = $row['password'];
+                        $_SESSION['fullName'] = $row['firstName']." ".$row['lastName'];
+                    }
+                    
                     header('location: index.php');
+
                 }else{
                     echo "
                     <script>

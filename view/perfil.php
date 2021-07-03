@@ -4,14 +4,18 @@
 ?>
 
 <!-- CONTEUDO DA PÁGINA AQUI -->
-<form action="./pesquisa.php" method="get">
-    <input type="hidden" name="elementoPesquisa" value="<?php echo $_SESSION['username'] ?>"/>
-    <input type="submit" value="Meus Projetos" />
-</form>
 
-<form action="./cadastroProjeto.php" method="get">
-     <input type="submit" value="Cadastrar Projeto" />
-</form>
+<a href="./meusProjetos.php" class="btn btn-primary">Meus Projetos</a>
+<br/>
+<br/>
+
+<a href="./cadastroProjeto.php" class="btn btn-primary">Cadastrar Projeto</a>
+<br/>
+<br/>
+
+<a href="../index.php" class="btn btn-secondary">Home</a>
+<br/>
+<br/>
 
 
 <?php 

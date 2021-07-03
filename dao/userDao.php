@@ -1,26 +1,8 @@
 <?php
-     require_once('dbconfig.php');  
-     
-     $op = $_POST['op'];
-
-     switch($op){
-          case 0:
-               insert($conn, $_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['username'], $_POST['password'], $_POST['type']);
-               break;
-          case 1:
-               update($conn, $_POST['id'], $_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['username'], $_POST['password']);
-               break;
-          case 2:
-               //read
-               break;
-          case 3:
-               remove($conn, $_POST['id']);
-               break;
-     }
 
      function insert($conn, $firstName, $lastName, $email, $username, $password, $type){
 
-          $query = "INSERT INTO users(firstName, lastName, email, username, password, type) values(:fn, :ln,:em, :usr, :pwd, :typ)";
+          $query = "INSERT INTO users(firstName, lastName, email, username, password, type) values(:fn, :ln,:em, :usr, :pwd, :tp)";
           $stmt = $conn->prepare($query);
           $result =$stmt->execute(
                [ 
@@ -28,8 +10,8 @@
                ':ln' => $lastName,
                ':em' => $email,
                ':usr' => $username,
-               ':psw' => $password, //AINDA NÃO HÁ CRIPTOGRAFIA PARA AS SENHAS
-               ':typ' => $type
+               ':pwd' => $password, //AINDA NÃO HÁ CRIPTOGRAFIA PARA AS SENHAS
+               ':tp' => $type
 
                ]
           );

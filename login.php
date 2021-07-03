@@ -24,7 +24,7 @@
                      <input type="password" name="password" class="form-control" required/>  
                      <br/>  
                      <input type="submit" name="login" class="btn btn-info" value="Login" />
-                     <a href = 'register.php' class="btn btn-success">Register</a>                     
+                     <a href = './view/userRegister.php' class="btn btn-success">Register</a>                     
                 </form>  
            </div>  
            <br />  
