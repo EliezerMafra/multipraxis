@@ -37,34 +37,41 @@
             }
         }else{
             unlink("../uploads/".$proj['documento']);
-            
 
             $fileName = $_POST['titulo'].$_POST['autor'].".".pathinfo($_FILES['documento']['name'], PATHINFO_EXTENSION);
 
             $destination = '../uploads/'.$fileName;
     
             $file = $_FILES['documento']['tmp_name'];
+
+            if(move_uploaded_file($file, $destination)){
     
-            if(update($conn, $_POST['id'], $_POST['titulo'], $_POST['resumo'], $_POST['autor'], $_POST['palavras'], $_POST['coautor1'], $_POST['coautor2'], $_POST['coautor3'], $_POST['coautor4'], $_POST['coautor5'], $fileName)
-                && move_uploaded_file($file, $destination)
-            ){
-                echo "
-                    <script>
-                            alert('Atualizado com Sucesso!!!');
-                            window.location.href = './meusProjetos.php';
-                    </script>
-                    ";
+                if(update($conn, $_POST['id'], $_POST['titulo'], $_POST['resumo'], $_POST['autor'], $_POST['palavras'], $_POST['coautor1'], $_POST['coautor2'], $_POST['coautor3'], $_POST['coautor4'], $_POST['coautor5'], $fileName)){
+                    echo "
+                        <script>
+                                alert('Atualizado com Sucesso!!!');
+                                window.location.href = './meusProjetos.php';
+                        </script>
+                        ";
+                }else{
+                    echo "
+                        <script>
+                                alert('Erro ao atualizar! (Banco de Dados)!!');
+                                window.location.href = './meusProjetos.php';
+                                </script>
+                                ";
+                }
+                  
             }else{
                 echo "
                     <script>
-                            alert('Erro ao atualizar!!!');
+                            alert('Erro ao atualizar!!! (Salvar arquivo)');
+                            window.location.href = './meusProjetos.php';
                             </script>
                             ";
-                        }
-        }        
-
+            }
+        }
     }
-
 
 ?>
 
